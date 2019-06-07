@@ -28,6 +28,15 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+  <style>
+    .label-danger {
+        background-color: #d9534f !important;
+    }
+    .label-success {
+        background-color: #5cb85c !important;
+    }
+  </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini fixed">
     <div id="app">
@@ -234,13 +243,6 @@
                 </ol>
             </section>
 
-            <div class="pad margin no-print">
-                <div class="callout callout-info" style="margin-bottom: 0!important;">
-                    <h4><i class="fa fa-info"></i> Note:</h4>
-                    This page has been enhanced for printing. Click the print button at the bottom of the invoice to test.
-                </div>
-            </div>
-            
             @yield('contenido')
 
             <div class="clearfix"></div>
@@ -258,14 +260,14 @@
 <!-- /.control-sidebar -->
 <!-- Add the sidebar's background. This div must be placed
     immediately after the control sidebar --> 
-<!-- ./wrapper -->
-<script src="js/app.js"></script>
-<!-- jQuery 3 -->
+    <!-- jQuery 3 -->
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- SlimScroll -->
 <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- ./wrapper -->
+<script src="js/app.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- FastClick -->
 <script src="bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
