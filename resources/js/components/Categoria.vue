@@ -16,9 +16,12 @@
                     <button type="button" @click="abrirModal('categoria','registrar','')" class="btn btn-secondary">
                         <span class="glyphicon glyphicon-copy"></span>&nbsp;Nuevo
                     </button>
+                    <button type="button" @click="abrirModal('categoria','registrar','')" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+                        <span class="glyphicon glyphicon-copy"></span>&nbsp;Nuevo
+                    </button>
                 </div>
                 <div class="form-group">
-                    <table class="table table-bordered table-striped table-sm">
+                    <table class="table table-bordered table-striped table-sm" data-filtering="true" data-paging="true" data-paging-size="10" id="cat_table">
                         <thead>
                             <tr>
                                 <th>Opciones</th>
@@ -29,8 +32,8 @@
                         </thead>
                         <tbody>
                             <tr v-for="categoria in arrayCategoria" :key="categoria.id">
-                                <td>
-                                    <button type="button" @click="abrirModal('categoria','actualizar',categoria)" class="btn btn-warning btn-sm">
+                                <td style="text-align:center;width:120px;">
+                                    <button type="button" @click="abrirModal('categoria','actualizar',categoria)" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#myModal">
                                         <i class="glyphicon glyphicon-pencil"></i>
                                     </button>
                                     <button type="button" class="btn btn-danger btn-sm">
@@ -67,19 +70,55 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Nombre</label>
                                 <div class="col-sm-6">
-                                    <input type="text" v-model="nombre" class="form-control">
+                                    <input type="text" v-model="nombre" placeholder="Ingrese nombre" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Descripción</label>
                                 <div class="col-sm-6">
-                                    <input type="text" v-model="descripcion" class="form-control">
+                                    <input type="text" v-model="descripcion" placeholder="Ingrese descripción" class="form-control">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" @click="cerrarModal()" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" @click="cerrarModal()" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button tyle="button" @click="registrarCategoria()" v-if="tipoAccion==1" class="btn btn-primary">Guardar</button>
+                        <button tyle="button" v-else class="btn btn-primary">Actualizar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false" role="dialog">
+            <div class="modal-dialog modal-lg" style="width:50%;">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" v-text="tituloModal"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Nombre</label>
+                                <div class="col-sm-6">
+                                    <input type="text" v-model="nombre" placeholder="Ingrese nombre" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Descripción</label>
+                                <div class="col-sm-6">
+                                    <input type="text" v-model="descripcion" placeholder="Ingrese descripción" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button tyle="button" v-if="tipoAccion==1" class="btn btn-primary" data-dismiss="modal" @click="registrarCategoria()">Guardar</button>
+                        <button tyle="button" v-else class="btn btn-primary" data-dismiss="modal">Actualizar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -94,7 +133,10 @@
                 descripcion: '',
                 arrayCategoria: [],
                 modal: 0,
-                tituloModal: ''
+                tituloModal: '',
+                tipoAccion: 0,
+                errorCategoria: 0,
+                errorMostrarMsjCategoria: []
             }
         },
         methods: {
@@ -104,33 +146,44 @@
                 .then(function (response) {
                     me.arrayCategoria = response.data;
                 })
-                .catch(function (error) {
-                    // handle error
+                .catch(function (error) { 
                     console.log(error);
                 })
                 .finally(function () {
-                    // always executed
                 });
             },
             registrarCategoria(){
-
+                let me=this;
+                axios.post('/categoria/registrar',{
+                    'nombre':this.nombre,
+                    'descripcion':this.descripcion
+                })
+                .then(function (response) {
+                    me.cerrarModal();
+                    me.listarCategoria();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
             },
             abrirModal(modelo,accion,data=[]){
                 switch(modelo){
                     case "categoria":{
                         switch(accion){
                             case "registrar": {
-                                this.modal=1;
+                                //this.modal=1;
                                 this.nombre="";
                                 this.descripcion="";
                                 this.tituloModal="Registrar Categoría";
+                                this.tipoAccion=1;
                                 break; 
                             }
                             case "actualizar": {
-                                this.modal=1;
+                                //this.modal=1;
                                 this.tituloModal="Actualizar Categoría";
                                 this.nombre=data.nombre;
                                 this.descripcion=data.descripcion;
+                                this.tipoAccion=2;
                                 break;
                             }
                         }
@@ -138,7 +191,11 @@
                 }
             },
             cerrarModal(){
-                this.modal=0;
+                //this.modal=0;
+                this.tituloModal='';
+                this.nombre='';
+                this.descripcion='';
+                this.tipoAccion=0;
             }
         },
         mounted() {
