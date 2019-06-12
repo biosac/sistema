@@ -21,7 +21,7 @@
                     </button>
                 </div>
                 <div class="form-group">
-                    <table class="table table-bordered table-striped table-sm" data-filtering="true" data-paging="true" data-paging-size="10" id="cat_table">
+                    <table class="table table-bordered table-striped table-sm">
                         <thead>
                             <tr>
                                 <th>Opciones</th>
@@ -146,7 +146,7 @@
                 .then(function (response) {
                     me.arrayCategoria = response.data;
                 })
-                .catch(function (error) { 
+                .catch(function (error) {
                     console.log(error);
                 })
                 .finally(function () {
@@ -176,7 +176,7 @@
                                 this.descripcion="";
                                 this.tituloModal="Registrar Categoría";
                                 this.tipoAccion=1;
-                                break; 
+                                break;
                             }
                             case "actualizar": {
                                 //this.modal=1;
@@ -213,7 +213,7 @@
     .modal-dialog {
         padding-top: 80px !important;
     }
-    .modal-header { 
+    .modal-header {
         background-color: #3c8dbc !important;
         color: white !important;
     }

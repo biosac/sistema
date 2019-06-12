@@ -6656,7 +6656,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.mostrar {\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    /*background-color: #3c29297a !important;*/\n}\n.modal-dialog {\n    padding-top: 80px !important;\n}\n.modal-header { \n    background-color: #3c8dbc !important;\n    color: white !important;\n}\n", ""]);
+exports.push([module.i, "\n.mostrar {\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    /*background-color: #3c29297a !important;*/\n}\n.modal-dialog {\n    padding-top: 80px !important;\n}\n.modal-header {\n    background-color: #3c8dbc !important;\n    color: white !important;\n}\n", ""]);
 
 // exports
 
@@ -38181,15 +38181,7 @@ var render = function() {
         _c("div", { staticClass: "form-group" }, [
           _c(
             "table",
-            {
-              staticClass: "table table-bordered table-striped table-sm",
-              attrs: {
-                "data-filtering": "true",
-                "data-paging": "true",
-                "data-paging-size": "10",
-                id: "cat_table"
-              }
-            },
+            { staticClass: "table table-bordered table-striped table-sm" },
             [
               _vm._m(1),
               _vm._v(" "),
@@ -51305,7 +51297,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\sistema\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\xampp\htdocs\sistema\resources\js\app.js */"./resources/js/app.js");
 
 
 /***/ })

@@ -18,7 +18,6 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
-  <link rel="stylesheet" href="footables/css/footable.bootstrap.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -188,7 +187,7 @@
                         </div>
                     </li>
                     </ul>
-                </li>  
+                </li>
                 </ul>
             </div>
             </nav>
@@ -260,7 +259,7 @@
     </footer>
 <!-- /.control-sidebar -->
 <!-- Add the sidebar's background. This div must be placed
-    immediately after the control sidebar --> 
+    immediately after the control sidebar -->
     <!-- jQuery 3 -->
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <!-- SlimScroll -->
@@ -275,17 +274,9 @@
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
-<script src="footables/js/footable.min.js"></script>
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree();
-    $('.table').footable({
-		"paging": {
-            "enabled": true,
-            "position": "right",
-            "size": 10
-		}
-	});
   })
 </script>
 </body>
