@@ -6656,7 +6656,11 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
+<<<<<<< HEAD
 exports.push([module.i, "\n.mostrar {\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    /*background-color: #3c29297a !important;*/\n}\n.modal-dialog {\n    padding-top: 80px !important;\n}\n.modal-header {\n    background-color: #3c8dbc !important;\n    color: white !important;\n}\n", ""]);
+=======
+exports.push([module.i, "\n.mostrar {\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    /*background-color: #3c29297a !important;*/\n}\n.modal-dialog {\n    padding-top: 80px !important;\n}\n.modal-header { \n    background-color: #3c8dbc !important;\n    color: white !important;\n}\n.div-error{\n    display: flex;\n    justify-content: center;\n}\n.text-error{\n    color: red !important;\n    font-weight: bold;\n}\n", ""]);
+>>>>>>> 44c4d7ce6a7a22c1137d11ace5abc1334c3a5233
 
 // exports
 
@@ -38181,7 +38185,14 @@ var render = function() {
         _c("div", { staticClass: "form-group" }, [
           _c(
             "table",
+<<<<<<< HEAD
             { staticClass: "table table-bordered table-striped table-sm" },
+=======
+            {
+              staticClass: "table table-bordered table-striped",
+              attrs: { id: "example2" }
+            },
+>>>>>>> 44c4d7ce6a7a22c1137d11ace5abc1334c3a5233
             [
               _vm._m(1),
               _vm._v(" "),

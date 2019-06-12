@@ -21,7 +21,7 @@
                     </button>
                 </div>
                 <div class="form-group">
-                    <table class="table table-bordered table-striped table-sm">
+                    <table class="table table-bordered table-striped" id="example2">
                         <thead>
                             <tr>
                                 <th>Opciones</th>
@@ -216,5 +216,13 @@
     .modal-header {
         background-color: #3c8dbc !important;
         color: white !important;
+    }
+    .div-error{
+        display: flex;
+        justify-content: center;
+    }
+    .text-error{
+        color: red !important;
+        font-weight: bold;
     }
 </style>
