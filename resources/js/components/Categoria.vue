@@ -57,40 +57,6 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" tabindex="-1" :class="{'mostrar':modal}" role="dialog">
-            <div class="modal-dialog modal-lg" role="document">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" @click="cerrarModal()" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title" v-text="tituloModal"></h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Nombre</label>
-                                <div class="col-sm-6">
-                                    <input type="text" v-model="nombre" placeholder="Ingrese nombre" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Descripción</label>
-                                <div class="col-sm-6">
-                                    <input type="text" v-model="descripcion" placeholder="Ingrese descripción" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" @click="cerrarModal()" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button tyle="button" @click="registrarCategoria()" v-if="tipoAccion==1" class="btn btn-primary">Guardar</button>
-                        <button tyle="button" v-else class="btn btn-primary">Actualizar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal -->
         <div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false" role="dialog">
             <div class="modal-dialog modal-lg" style="width:50%;">
                 <!-- Modal content-->
