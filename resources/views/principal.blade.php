@@ -280,15 +280,15 @@
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree();
-    $('#example2').DataTable({
-    'paging'      : true,
-    'lengthChange': false,
-    'searching'   : false,
-    'ordering'    : true,
-    'info'        : true,
-    'autoWidth'   : false
-    })
-  })
+    var dt = $('#example2').DataTable({
+                'paging'      : true,
+                'lengthChange': true,
+                'searching'   : true,
+                'ordering'    : true,
+                'info'        : true,
+                'autoWidth'   : false,
+                });
+    });
 </script>
 </body>
 </html>

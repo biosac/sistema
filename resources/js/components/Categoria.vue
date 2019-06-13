@@ -118,7 +118,7 @@
                     <div class="modal-footer">
                         <button tyle="button" v-if="tipoAccion==1" class="btn btn-primary" data-dismiss="modal" @click="registrarCategoria()">Guardar</button>
                         <button tyle="button" v-else class="btn btn-primary" data-dismiss="modal">Actualizar</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="button" @click="cerrarModal()" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -136,7 +136,7 @@
                 tituloModal: '',
                 tipoAccion: 0,
                 errorCategoria: 0,
-                errorMostrarMsjCategoria: []
+                errorMostrarMsjCategoria: [],
             }
         },
         methods: {
