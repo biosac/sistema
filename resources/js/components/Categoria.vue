@@ -21,7 +21,17 @@
                     </button>
                 </div>
                 <div class="form-group">
-                    <table class="table table-bordered table-striped" id="example2">
+                    <div style="padding-bottom:10px;">
+                        <div class="form-inline">
+                            <select class="form-control col-md-3" id="opcion" name="opcion">
+                                <option value="nombre">Nombre</option>
+                                <option value="descripcion">Descripción</option>
+                            </select>
+                            <input type="text" id="texto" name="texto" class="form-control" placeholder="Texto a buscar">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-striped table-sm" id="example2">
                         <thead>
                             <tr>
                                 <th>Opciones</th>
@@ -33,12 +43,19 @@
                         <tbody>
                             <tr v-for="categoria in arrayCategoria" :key="categoria.id">
                                 <td style="text-align:center;width:120px;">
-                                    <button type="button" @click="abrirModal('categoria','actualizar',categoria)" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#myModal">
+                                    <button type="button" @click="abrirModal('categoria','actualizar',categoria)" class="btn btn-warning btn-sm">
                                         <i class="glyphicon glyphicon-pencil"></i>
                                     </button>
-                                    <button type="button" class="btn btn-danger btn-sm">
-                                        <i class="glyphicon glyphicon-trash"></i>
-                                    </button>
+                                    <template v-if="categoria.condicion">
+                                        <button type="button" class="btn btn-danger btn-sm" @click="desactivarCategoria(categoria_id)">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </button>
+                                    </template>
+                                    <template v-else>
+                                        <button type="button" class="btn btn-info btn-sm" @click="activarCategoria(categoria_id)">
+                                            <i class="glyphicon glyphicon-ok"></i>
+                                        </button>
+                                    </template>
                                 </td>
                                 <td v-text="categoria.nombre"></td>
                                 <td v-text="categoria.descripcion"></td>
@@ -49,6 +66,28 @@
                             </tr>
                         </tbody>
                     </table>
+                    <nav>
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="#">Ant</a>
+                            </li>
+                            <li class="page-item active">
+                                <a class="page-link" href="#">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">2</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">3</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">4</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Sig</a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
             <div class="box-footer">
@@ -56,39 +95,46 @@
             </div>
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false" role="dialog">
-            <div class="modal-dialog modal-lg" style="width:50%;">
-                <!-- Modal content-->
+        <!--Inicio del modal agregar/actualizar-->
+        <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" v-text="tituloModal"></h4>
+                        <button type="button" class="close" @click="cerrarModal()">&times;</button>
+                        <h4 class="modal-title" v-text="tituloModal"></h4>
                     </div>
                     <div class="modal-body">
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Nombre</label>
-                                <div class="col-sm-6">
-                                    <input type="text" v-model="nombre" placeholder="Ingrese nombre" class="form-control">
+                        <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                            <div class="form-group row">
+                                <label class="col-md-2 form-control-label" for="text-input">Nombre</label>
+                                <div class="col-md-9">
+                                    <input type="text" v-model="nombre" class="form-control" placeholder="Nombre de categoría">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Descripción</label>
-                                <div class="col-sm-6">
-                                    <input type="text" v-model="descripcion" placeholder="Ingrese descripción" class="form-control">
+                            <div class="form-group row">
+                                <label class="col-md-2 form-control-label" for="email-input">Descripción</label>
+                                <div class="col-md-9">
+                                    <input type="email" v-model="descripcion" class="form-control" placeholder="Ingrese descripción">
                                 </div>
                             </div>
-                        </div>
+                            <div v-show="errorCategoria" class="form-group row div-error">
+                                <div class="text-center text-error">
+                                    <div v-for="error in errorMostrarMsjCategoria" :key="error" v-text="error"></div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     <div class="modal-footer">
-                        <button tyle="button" v-if="tipoAccion==1" class="btn btn-primary" data-dismiss="modal" @click="registrarCategoria()">Guardar</button>
-                        <button tyle="button" v-else class="btn btn-primary" data-dismiss="modal">Actualizar</button>
-                        <button type="button" @click="cerrarModal()" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                        <button type="button" v-if="tipoAccion==1" class="btn btn-primary" @click="registrarCategoria()">Guardar</button>
+                        <button type="button" v-if="tipoAccion==2" class="btn btn-primary" @click="actualizarCategoria()">Actualizar</button>
                     </div>
                 </div>
+                <!-- /.modal-content -->
             </div>
+            <!-- /.modal-dialog -->
         </div>
+        <!--Fin del modal-->
     </section>
 </template>
 <script>
@@ -97,6 +143,7 @@
             return {
                 nombre: '',
                 descripcion: '',
+                categoria_id: 0,
                 arrayCategoria: [],
                 modal: 0,
                 tituloModal: '',
@@ -119,6 +166,9 @@
                 });
             },
             registrarCategoria(){
+                if (this.validarCategoria()){
+                    return;
+                }
                 let me=this;
                 axios.post('/categoria/registrar',{
                     'nombre':this.nombre,
@@ -127,17 +177,77 @@
                 .then(function (response) {
                     me.cerrarModal();
                     me.listarCategoria();
+                    this.errorCategoria=0;
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
+            },
+            actualizarCategoria(){
+                if(this.validarCategoria()){
+                    return;
+                }
+                let me = this;
+                axios.put('/categoria/actualizar',{
+                    'nombre':this.nombre,
+                    'descripcion':this.descripcion,
+                    'id':this.categoria_id
+                }).then(function(response){
+                    me.cerrarModal();
+                    me.listarCategoria();
+                }).catch(function(error){
+                    console.log(error);
+                });
+            },
+            desactivarCategoria(){
+                const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false,
+                })
+
+                swalWithBootstrapButtons.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
+                    swalWithBootstrapButtons.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                    )
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Your imaginary file is safe :)',
+                    'error'
+                    )
+                }
+                })
+            },
+            validarCategoria(){
+                this.errorCategoria=0;
+                this.errorMostrarMsjCategoria =[];
+                if (!this.nombre) this.errorMostrarMsjCategoria.push("El nombre de la categoría no puede estar vacío.");
+                if (this.errorMostrarMsjCategoria.length) this.errorCategoria = 1;
+                return this.errorCategoria;
             },
             abrirModal(modelo,accion,data=[]){
                 switch(modelo){
                     case "categoria":{
                         switch(accion){
                             case "registrar": {
-                                //this.modal=1;
+                                this.modal=1;
                                 this.nombre="";
                                 this.descripcion="";
                                 this.tituloModal="Registrar Categoría";
@@ -145,10 +255,11 @@
                                 break;
                             }
                             case "actualizar": {
-                                //this.modal=1;
+                                this.modal=1;
                                 this.tituloModal="Actualizar Categoría";
-                                this.nombre=data.nombre;
-                                this.descripcion=data.descripcion;
+                                this.nombre=data['nombre'];
+                                this.descripcion=data['descripcion'];
+                                this.categoria_id=data['id'];
                                 this.tipoAccion=2;
                                 break;
                             }
@@ -157,11 +268,11 @@
                 }
             },
             cerrarModal(){
-                //this.modal=0;
+                this.modal=0;
                 this.tituloModal='';
                 this.nombre='';
                 this.descripcion='';
-                this.tipoAccion=0;
+                this.errorCategoria=0;
             }
         },
         mounted() {
@@ -170,18 +281,15 @@
     }
 </script>
 <style>
-    .mostrar {
+    .modal-content{
+        width: 100% !important;
+        position: absolute !important;
+    }
+    .mostrar{
         display: list-item !important;
         opacity: 1 !important;
         position: absolute !important;
-        /*background-color: #3c29297a !important;*/
-    }
-    .modal-dialog {
-        padding-top: 80px !important;
-    }
-    .modal-header {
-        background-color: #3c8dbc !important;
-        color: white !important;
+        background-color: #3c29297a !important;
     }
     .div-error{
         display: flex;
@@ -190,5 +298,9 @@
     .text-error{
         color: red !important;
         font-weight: bold;
+    }
+    .modal-header{
+        background-color: #367fa9 !important;
+        color: white !important;
     }
 </style>

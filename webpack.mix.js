@@ -11,6 +11,9 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js([
-    'resources/js/app.js'
-], 'public/js/app.js');
+mix.scripts([
+        'resources/plantilla/js/sweetalert2.all.js'
+    ], 'public/js/plantilla.js')
+    .js([
+        'resources/js/app.js'
+    ], 'public/js/app.js');

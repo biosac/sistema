@@ -18,7 +18,7 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
-  <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <!--<link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">--->
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -267,6 +267,7 @@
 <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- ./wrapper -->
 <script src="js/app.js"></script>
+<script src="js/plantilla.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- FastClick -->
@@ -275,44 +276,44 @@
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
-<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!--<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>-->
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree();
-    $('#example2').DataTable({
-        'paging'      : true,
-        'processing:' : true,
+    /*$('#example2').DataTable({
+        'paging': true,
+        'processing:': true,
         'lengthChange': true,
-        'searching'   : true,
-        'ordering'    : true,
-        'info'        : true,
-        'autoWidth'   : false,
+        'searching': true,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false,
         "language": {
-            "sProcessing":     "Procesando...",
-            "sLengthMenu":     "Mostrar _MENU_ registros",
-            "sZeroRecords":    "No se encontraron resultados",
-            "sEmptyTable":     "Ningún dato disponible en esta tabla",
-            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-            "sInfoPostFix":    "",
-            "sSearch":         "Buscar:",
-            "sUrl":            "",
-            "sInfoThousands":  ",",
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
             "sLoadingRecords": "Cargando...",
             "oPaginate": {
-                "sFirst":    "Primero",
-                "sLast":     "Último",
-                "sNext":     "Siguiente",
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
                 "sPrevious": "Anterior"
             },
             "oAria": {
-                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
                 "sSortDescending": ": Activar para ordenar la columna de manera descendente"
             }
         }
-    });
+    });*/
   });
 </script>
 </body>
