@@ -12,7 +12,7 @@ const mix = require('laravel-mix');
  */
 
 mix.scripts([
-        'resources/plantilla/js/sweetalert2.all.js'
+        'resources/plantilla/sweetalert/dist/sweetalert.min.js'
     ], 'public/js/plantilla.js')
     .js([
         'resources/js/app.js'
